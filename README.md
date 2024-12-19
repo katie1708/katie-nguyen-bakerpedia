@@ -56,11 +56,25 @@ These APIs can be used for nice to have features
 
 ### Mockups
 
-Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
+![sign up page](./Proposal_images/signup.png)
+
+![sign in page](./Proposal_images/signin.png)
+
+![my profile page](./Proposal_images/Myprofile.png)
+
+![my recipes page](./Proposal_images/My%20recipe.png)
+
+![recipe details page](./Proposal_images/Recipe%20details.png)
+
+![add baking history modal](./Proposal_images/Add%20baking%20history.png)
+
+![add recipe page](./Proposal_images/Add%20recipe.png)
+
+![edit recipe page](./Proposal_images/Edit%20recipe.png)
 
 ### Data
 
-Describe your data and the relationships between them. You can show this visually using diagrams, or write it out. 
+![SQL diagram](./Proposal_images/sql-diagram.png)
 
 ### Endpoints
 
