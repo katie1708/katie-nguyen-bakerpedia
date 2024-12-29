@@ -1,0 +1,33 @@
+//colors
+$gray-100:#202532;
+$gray-80:#50545E;
+$gray-disable:#838791;
+$gray-40:#BEC0C5;
+$gray-10:#D9DADD;
+$gray-05:#EAEAEB;
+$gray-0:#F2F2F3;//not in use
+$white:#FFFFFF;
+$dark-brown:#A64F21;
+$light-brown:#FFEDD9;
+$red-alert:#9F1B1F;
+
+//typography
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+//Font size
+$text-size: (
+	h1: 40px,
+	h2: 24px,
+	p1: 16px,
+);
+
+$line-height: (
+	h1: 60px,
+	h2: 36px,
+	p1: 24px,
+);
+
+//Font weight
+$normal:400;
+$semi-bold:600;
+$bold:700
