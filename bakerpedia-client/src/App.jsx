@@ -11,7 +11,6 @@ function App() {
 
   return (
     <BrowserRouter>
-        <Header/>
           <Routes>
             <Route path="/sign-up" element={<Signup/>}></Route>
             <Route path="/sign-in" element={<Signin/>}></Route>
@@ -21,7 +20,6 @@ function App() {
             <Route path="/add-recipe" element={<AddRecipe/>}></Route> 
             <Route path="/edit-recipe" element={<EditRecipe/>}></Route>
           </Routes>
-        <Footer/>
     </BrowserRouter>
   )
 }
