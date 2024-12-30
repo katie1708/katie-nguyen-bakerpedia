@@ -6,11 +6,13 @@ import Recipes from "./pages/Recipes";
 import RecipeDetails from "./pages/RecipeDetails";
 import AddRecipe from "./pages/AddRecipe";
 import EditRecipe from "./pages/EditRecipe";
+import Header from "./components/Header/Header";
 
 function App() {
 
   return (
     <BrowserRouter>
+          <Header />
           <Routes>
             <Route path="/sign-up" element={<Signup/>}></Route>
             <Route path="/sign-in" element={<Signin/>}></Route>
