@@ -7,6 +7,7 @@ import RecipeDetails from "./pages/RecipeDetails";
 import AddRecipe from "./pages/AddRecipe";
 import EditRecipe from "./pages/EditRecipe";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/add-recipe" element={<AddRecipe/>}></Route> 
             <Route path="/edit-recipe" element={<EditRecipe/>}></Route>
           </Routes>
+          <Footer />
     </BrowserRouter>
   )
 }
