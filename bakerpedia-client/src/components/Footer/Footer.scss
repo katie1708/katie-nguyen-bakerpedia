@@ -1,0 +1,11 @@
+@use '../../styles/_global.scss' as *;
+@use '../../styles/_variables.scss' as *;
+
+.footer {
+    margin-top: auto;
+    background-color: $light-brown;
+    padding: 1.5rem 4rem;
+    * {
+        background-color: $light-brown;
+    }
+}
