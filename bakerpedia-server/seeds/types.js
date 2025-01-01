@@ -9,32 +9,32 @@ export async function seed(knex) {
     {
       id: 1, 
       name: 'Muffins',
-      icon: 'muffins.svg'
+      icon: 'http://localhost:8080/icons/muffins.svg'
     },
     {
       id: 2, 
       name: 'Pastries',
-      icon: 'pastries.svg'
+      icon: 'http://localhost:8080/icons/pastries.svg'
     },
     {
       id: 3, 
       name: 'Bagels',
-      icon: 'bagels.svg'
+      icon: 'http://localhost:8080/icons/bagels.svg'
     },
     {
       id: 4, 
       name: 'Cookies',
-      icon: 'cookies.svg'
+      icon: 'http://localhost:8080/icons/cookies.svg'
     },
     {
       id: 5, 
       name: 'Baguettes',
-      icon: 'baguettes.svg'
+      icon: 'http://localhost:8080/icons/baguette.svg'
     },
     {
       id: 6, 
       name: 'Cakes',
-      icon: 'cakes.svg'
+      icon: 'http://localhost:8080/icons/cakes.svg'
     }
   ]);
 };
