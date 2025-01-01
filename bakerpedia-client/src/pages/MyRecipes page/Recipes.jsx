@@ -21,7 +21,7 @@ export default function Recipes() {
         } catch(e) {
             console.log(e)
         }
-    },[]);
+    },[recipeList]);
 
     //Fetch the recipe type list
     const [recipeTypes, setRecipeTypes] = useState([]);
@@ -36,13 +36,14 @@ export default function Recipes() {
         } catch(e) {
             console.log(e)
         }
-    },[]);
+    },[recipeTypes]);
 
     //Applying filter to the recipes list
     const [typeValue,setTypeValue] = useState('no type');
 
     const handleTypeChange = (e) => {
         if (e.target.value == 'no type') {
+            setTypeValue(e.target.value)
             setRecipeList(recipeList)
         } else {
             setTypeValue(e.target.value)
@@ -104,7 +105,7 @@ export default function Recipes() {
             <div className='recipes__list'>
                 {recipeList
                 // ?.filter((recipe) => recipe.type_id == filteredType.id)
-                ?.map((recipe) => (
+                .map((recipe) => (
                     <RecipeCard key={recipe.id} id={recipe.id} recipe={recipe} type={recipeTypes.find((type) => type.id === recipe.type_id)}/>
                 ))}
             </div>
