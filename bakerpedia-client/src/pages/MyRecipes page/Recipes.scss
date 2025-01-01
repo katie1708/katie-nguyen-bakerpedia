@@ -1,0 +1,110 @@
+@use '../../styles/global' as *;
+@use "sass:map";
+@use '../../styles/variables' as *;
+
+
+.recipes {
+    display:flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    padding: 4rem;
+    &__function {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__filter {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        select {
+            padding:  0.75rem 1.5rem;
+            border-color: $gray-40;
+            border-radius: 6px;
+        }
+    }
+    &__search {
+        display: flex;
+        column-gap: 0.5rem;
+        &-box {
+            border: solid 1px $gray-40;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            padding-left: 0.5rem;
+            display: flex;
+            column-gap: 0.5rem;
+        }
+        &-icon {
+            width: 1.5rem;
+            height: auto;
+            color: $gray-100;
+        }
+        &-input {
+            border: none;
+        }
+        &-button {
+            border-color: $gray-40;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        row-gap: 2rem;
+    }
+}
+
+.recipe__card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 30px 0 #0000000D;
+    border-radius: 20px;
+    // margin-right: 2rem;
+
+    &-image {
+        width: 375px;
+        height: auto;
+        border-radius: 20px 20px 0 0;
+    }
+
+    &-info {
+        display: flex;
+        justify-content: center;
+        column-gap: 40px;
+        padding: 1rem 0;
+        margin-top: -4rem;
+        width: 100%;
+        background-color: rgb(255,255,255,0.6);
+
+        div {
+            display: flex;
+            column-gap: 8px;
+            background-color: transparent;
+            img,p {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &-type {
+        display: flex;
+        column-gap: 8px;
+        align-items: center;
+        padding: 1.5rem 1rem 0 1rem;
+    }
+
+    &-name {
+        font-size: map.get($text-size,h2);
+        font-weight: $semi-bold;
+        padding: 1rem 1rem 0 1rem;
+    }
+
+    &-link {
+        text-decoration: none;
+        color: $dark-brown;
+        padding: 1rem 1rem 1.5rem 1rem;
+        border-radius: 8px;
+    }
+}
