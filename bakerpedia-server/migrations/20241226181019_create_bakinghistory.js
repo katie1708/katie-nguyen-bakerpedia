@@ -6,7 +6,7 @@ export function up(knex) {
     return knex.schema
       .createTable("bakinghistory", (table) => {
           table.increments("id").primary();
-          table.timestamp('created_at').defaultTo(knex.fn.now());
+          table.date('date');
           table.integer("rating").notNullable();
           table.string("notes").notNullable();
           table
