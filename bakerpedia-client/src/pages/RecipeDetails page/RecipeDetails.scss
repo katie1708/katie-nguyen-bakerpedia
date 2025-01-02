@@ -138,7 +138,7 @@
                     padding-bottom: 0;
                 }
 
-                div {
+                > div {
                     display: flex;
                     flex-direction: column;
                     row-gap: 8px;
@@ -146,6 +146,10 @@
 
                 &--date {
                     color: $gray-80;
+                }
+
+                > button{
+                    border: none;
                 }
             }
         }

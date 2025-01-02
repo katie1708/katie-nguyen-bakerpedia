@@ -54,7 +54,7 @@ export default function RecipeDetails() {
         } catch(e) {
             console.log(e)
         }
-    },[recipeId])
+    },[recipeId,records])
     
     return(
         <div className="details">
@@ -77,7 +77,7 @@ export default function RecipeDetails() {
             </div>
             <div className="details__full">
                 <Details recipe={recipe}/>
-                <Records records={records}/>
+                <Records records={records} recipeId={recipe.id}/>
             </div>
         </div>
     )
