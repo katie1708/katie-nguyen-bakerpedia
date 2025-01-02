@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import StarRating from '../StarRating/StarRating';
 import deleteicon from "../../assets/icons/delete.svg"
+import { useState } from 'react';
+import DeleteRecord from '../DeleteRecord/DeleteRecord';
+import AddRecord from '../AddRecord/AddRecord';
 
 export default function Records(props) {
     const records = props.records
@@ -12,13 +15,25 @@ export default function Records(props) {
         day:"2-digit"
     };
 
-    // const date = new Date(records[1].date).toLocaleDateString();
-        
+    //Open Add modal
+    const [addState, setAddState] = useState(false);
+
+    function openAddModal() {
+        setAddState(!addState);
+    }
+
+    // Open Delete modal
+    const [deleteState, setDeleteState] = useState(false);
+
+    function openDeleteModal() {
+        setDeleteState(!deleteState);
+    };
+
     return (
         <div className='details__full-record'>
             <div className='details__full-record__title'>
                 <h2>Baking History</h2>
-                <Link to='/modal'>Add</Link>
+                <Link onClick={openAddModal}>Add</Link>
             </div>
             <div className='details__full-record__content'>
                 {records.map((record) => (
@@ -28,10 +43,22 @@ export default function Records(props) {
                             <StarRating rating={record.rating}/>
                             <p className='details__full-record__item--notes'>{record.notes}</p>
                         </div>
-                        <img src={deleteicon}/>
+                        <button onClick={openDeleteModal}>
+                            <img src={deleteicon}/>
+                        </button>
+                        <DeleteRecord
+                            toggle={deleteState} 
+                            record={record}
+                            action={openDeleteModal}
+                        />  
                     </div>
                 ))}
-            </div>            
+            </div>    
+            <AddRecord 
+                toggle={addState} 
+                recipeId={props.recipeId}
+                action={openAddModal}
+            />      
         </div>
     )
 }
