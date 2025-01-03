@@ -3,7 +3,7 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Profile from "./pages/Profile";
 import Recipes from "./pages/MyRecipes page/Recipes.jsx";
-import RecipeDetails from "./pages/RecipeDetails";
+import RecipeDetails from "./pages/RecipeDetails page/RecipeDetails.jsx";
 import AddRecipe from "./pages/AddRecipe";
 import EditRecipe from "./pages/EditRecipe";
 import Header from "./components/Header/Header";
@@ -19,7 +19,7 @@ function App() {
             <Route path="/sign-in" element={<Signin/>}></Route>
             <Route path="/profile" element={<Profile/>}></Route>
             <Route path="/" element={<Recipes/>}></Route>
-            <Route path="/recipe-details" element={<RecipeDetails/>}></Route> 
+            <Route path="/recipes/:recipeId" element={<RecipeDetails/>}></Route> 
             <Route path="/add-recipe" element={<AddRecipe/>}></Route> 
             <Route path="/edit-recipe" element={<EditRecipe/>}></Route>
           </Routes>

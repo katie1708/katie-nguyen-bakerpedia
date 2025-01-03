@@ -1,0 +1,61 @@
+@use '../../styles/global' as *;
+@use "sass:map";
+@use '../../styles/variables' as *;
+
+.delete-container {
+    display: none;
+    &--open {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;   
+        background-color: rgb(35,41,64,0.7);
+    }
+}
+
+
+.delete-active {
+    width: 35%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    padding: 3rem;
+    border-radius: 8px;
+
+    &__question {
+        font-size: map.get($text-size,h2);
+        line-height: map.get($line-height,h2);
+        font-weight: $semi-bold;
+    }
+
+    &__content {
+        padding-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+    }
+
+    &__button {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        column-gap: 12px;
+
+        > button {
+            border: solid 1px $gray-40;
+            border-radius: 6px;
+            width: 50%;
+            padding: 12px 24px;
+        }
+
+        &--delete {
+            background-color: $dark-brown;
+            color: $white;
+        }
+    }
+}
