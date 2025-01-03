@@ -35,25 +35,29 @@ export default function Records(props) {
                 <h2>Baking History</h2>
                 <Link onClick={openAddModal}>Add</Link>
             </div>
-            <div className='details__full-record__content'>
-                {records.map((record) => (
-                    <div className='details__full-record__item' key={record.id}>
-                        <div>
-                            <p className='details__full-record__item--date'>{new Date(record.date).toLocaleDateString('en-US',specFormat)}</p>
-                            <StarRating rating={record.rating}/>
-                            <p className='details__full-record__item--notes'>{record.notes}</p>
+            { (records.length == 0) ? (
+                <p className='details__full-record__content--blank'>No baking history yet</p>
+            ) : (
+                <div className='details__full-record__content'>
+                    {records.map((record) => (
+                        <div className='details__full-record__item' key={record.id}>
+                            <div>
+                                <p className='details__full-record__item--date'>{new Date(record.date).toLocaleDateString('en-US',specFormat)}</p>
+                                <StarRating rating={record.rating}/>
+                                <p className='details__full-record__item--notes'>{record.notes}</p>
+                            </div>
+                            <button onClick={openDeleteModal}>
+                                <img src={deleteicon}/>
+                            </button>
+                            <DeleteRecord
+                                toggle={deleteState} 
+                                record={record}
+                                action={openDeleteModal}
+                            />  
                         </div>
-                        <button onClick={openDeleteModal}>
-                            <img src={deleteicon}/>
-                        </button>
-                        <DeleteRecord
-                            toggle={deleteState} 
-                            record={record}
-                            action={openDeleteModal}
-                        />  
-                    </div>
-                ))}
-            </div>    
+                    ))}
+                </div>    
+            )}
             <AddRecord 
                 toggle={addState} 
                 recipeId={props.recipeId}
