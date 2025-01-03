@@ -10,18 +10,20 @@ export default function Recipes() {
     //Fetch the recipe list
     const [recipeList, setRecipeList] = useState([]);
 
+
     useEffect(() => {
         try {
             const fetchRecipes = async() => {
                 const recipeData = await axios.get(`${baseURL}/recipes`);
                 const recipes = recipeData.data;
                 setRecipeList(recipes);
+                setFilteredList(recipes)
             }
             fetchRecipes();
         } catch(e) {
             console.log(e)
         }
-    },[recipeList]);
+    },[]);
 
     //Fetch the recipe type list
     const [recipeTypes, setRecipeTypes] = useState([]);
@@ -39,21 +41,67 @@ export default function Recipes() {
     },[recipeTypes]);
 
     //Applying filter to the recipes list
+    const [filteredList,setFilteredList] = useState([]);
+    
+    //Type filter
     const [typeValue,setTypeValue] = useState('no type');
 
-    const handleTypeChange = (e) => {
-        if (e.target.value == 'no type') {
-            setTypeValue(e.target.value)
-            setRecipeList(recipeList)
-        } else {
-            setTypeValue(e.target.value)
+    const handleTypeFilter = (e) => {
+        setTypeValue(e.target.value)
+            
+        if(e.target.value == 'no type' && difficultyValue == 'no level') {
+            setFilteredList(recipeList)
+        } else if (e.target.value == 'no type' && difficultyValue !== 'no level') {
+            const filteredList = recipeList.filter((recipe) => recipe.difficulty == difficultyValue)
+            setFilteredList(filteredList)
+        } else if (e.target.value !== 'no type' && difficultyValue == 'no level') {
             const filteredType = recipeTypes.find((type) => type.name === e.target.value)
             const filteredList = recipeList.filter((recipe) => recipe.type_id == filteredType.id)
-           //the problem is after the first filter, the recipe list is not reset to full list
-            setRecipeList(filteredList)
-            if (e.target.value == 'no type') {
-                fetchRecipes();
-            }
+            setFilteredList(filteredList)
+        } else {
+            const filteredType = recipeTypes.find((type) => type.name === e.target.value)
+            const filteredList = recipeList.filter((recipe) => recipe.difficulty == difficultyValue && recipe.type_id == filteredType.id)
+            setFilteredList(filteredList)
+        }
+    }
+
+    //Difficulty filter
+    const [difficultyValue,setDifficultyValue] = useState('no level');
+
+    const handleDifficultyFilter = (e) => {
+        setDifficultyValue(e.target.value)
+            
+        if(e.target.value == 'no level' && typeValue == 'no type') {
+            setFilteredList(recipeList)
+        } else if (e.target.value !== 'no level' && typeValue == 'no type') {
+            const filteredList = recipeList.filter((recipe) => recipe.difficulty == e.target.value)
+            setFilteredList(filteredList)
+        } else if(e.target.value == 'no level' && typeValue !== 'no type' ) {
+            const filteredType = recipeTypes.find((type) => type.name == typeValue)
+            const filteredList = recipeList.filter((recipe) => recipe.type_id == filteredType.id)
+            setFilteredList(filteredList)
+        } else {
+            const filteredType = recipeTypes.find((type) => type.name == typeValue)
+            const filteredList = recipeList.filter((recipe) => recipe.difficulty == e.target.value && recipe.type_id == filteredType.id)
+            setFilteredList(filteredList)
+        }
+    }
+
+    //Search function
+    const [searchText,setSearchText] = useState("");
+
+    const handleSearchChange = (e) => {
+        setSearchText(e.target.value);
+    }
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        
+        if(searchText == "") {
+            setFilteredList(recipeList)
+        } else {
+            const filteredList = recipeList.filter((recipe) => recipe.name.toLowerCase().includes(searchText));
+            setFilteredList(filteredList)
         }
     }
 
@@ -68,7 +116,7 @@ export default function Recipes() {
                             id="recipe_type"
                             name="recipe_type"
                             value={typeValue}
-                            onChange={handleTypeChange}
+                            onChange={handleTypeFilter}
                         >
                             <option value="no type">Recipe type</option>
                             {recipeTypes.map((type) => (
@@ -82,20 +130,26 @@ export default function Recipes() {
                         <select
                             id="difficulty"
                             name="difficulty"
-                            // value={"test"}
-                            // onChange={something}
+                            value={difficultyValue}
+                            onChange={handleDifficultyFilter}
                         >
                             <option value="no level">Difficulty level</option>
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
                         </select>
                     </div>
                 </form>
-                <form className='recipes__search'>
+                <form className='recipes__search' onSubmit={handleSearch}>
                     <div className='recipes__search-box'>
                         <img className='recipes__search-icon' src={search} />
-                        <input className='recipes__search-input' type="search" placeholder="Search for recipe">
+                        <input 
+                            className='recipes__search-input' 
+                            type="search" 
+                            placeholder="Search for recipe"
+                            value={searchText}
+                            onChange={handleSearchChange}
+                            >
                         </input>
                     </div>
                     <button className='recipes__search-button'>Search</button>
@@ -103,11 +157,11 @@ export default function Recipes() {
             </div>
             
             <div className='recipes__list'>
-                {recipeList
-                // ?.filter((recipe) => recipe.type_id == filteredType.id)
-                .map((recipe) => (
+                { (filteredList.length !== 0) ? 
+                (filteredList.map((recipe) => (
                     <RecipeCard key={recipe.id} id={recipe.id} recipe={recipe} type={recipeTypes.find((type) => type.id === recipe.type_id)}/>
-                ))}
+                ))) : (<p className='recipes__list--empty'>No recipe found</p>)
+                }
             </div>
         </div>
     )
