@@ -105,7 +105,7 @@ export default function AddRecord(props) {
                                 return (
                                     <FaStar
                                         key={index}
-                                        size={24}
+                                        id="add_star"
                                         value={rating}
                                         onChange={handleRating}
                                         fill={((hoverValue || rating) > index) ? colors.brown : colors.gray}

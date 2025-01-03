@@ -24,6 +24,7 @@
     flex-direction: column;
     row-gap: 2.5rem;
     padding: 3rem;
+    border-radius: 8px;
 
     &__title {
         font-size: map.get($text-size,h2);
@@ -46,11 +47,18 @@
 
             #add_date {
                 border: solid 1px $gray-40;
+                border-radius: 6px;
                 padding: 12px 16px;
+            }
+
+            #add_star {
+                width: 24px;
+                height: auto;
             }
 
             #add_notes {
                 border: solid 1px $gray-40;
+                border-radius: 6px;
                 height: 88px;
                 padding: 12px 16px;
             }
