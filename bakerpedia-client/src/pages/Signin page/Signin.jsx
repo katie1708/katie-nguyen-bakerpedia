@@ -5,7 +5,7 @@ export default function Signin() {
 
     return(
         <div className="signin">
-            <h1>My Profile</h1>
+            <h1>Log in</h1>
             <form className="signin__form">
                 <div>
                     <label htmlFor="username">Username</label>
