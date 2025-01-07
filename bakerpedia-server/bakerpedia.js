@@ -4,6 +4,7 @@ import 'dotenv/config';
 import recipesRouter from "./routes/recipes.js"
 import typesRouter from "./routes/types.js"
 import recordsRouter from "./routes/records.js"
+import usersRouter from "./routes/users.js"
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.static('public'))
 app.use('/api',recipesRouter)
 app.use('/api',typesRouter)
 app.use('/api',recordsRouter)
+app.use('/api',usersRouter)
 
 //Port configuration
 const PORT = process.env.PORT || 3000;
