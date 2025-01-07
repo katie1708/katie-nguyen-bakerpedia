@@ -35,7 +35,7 @@ export default function RecipeCard(props) {
                     <p>{type.name}</p>
                 </div>
                 <p className='recipe__card-name'>{name}</p>
-                <Link className='recipe__card-link' to={`/recipes/${id}`}>View Recipe</Link>
+                <Link className='recipe__card-link' to={`/recipes/${id}`} state={user_id}>View Recipe</Link>
             </article>
         )
     }

@@ -3,27 +3,34 @@ import React, { useEffect, useState } from 'react';
 import search from "../../assets/icons/search.svg"
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import "./Recipes.scss"
+import {userAuth} from "../UserAuth.jsx";
 
 export default function Recipes() {
+    const auth = userAuth();
+    const user = auth.user;
+
     const baseURL = import.meta.env.VITE_API_URL;
 
     //Fetch the recipe list
     const [recipeList, setRecipeList] = useState([]);
-
+    
 
     useEffect(() => {
         try {
             const fetchRecipes = async() => {
                 const recipeData = await axios.get(`${baseURL}/recipes`);
-                const recipes = recipeData.data;
+                const recipes = recipeData.data.filter((recipe) => recipe.user_id == user.id);
+        
                 setRecipeList(recipes);
                 setFilteredList(recipes)
             }
-            fetchRecipes();
+            if(user){
+                fetchRecipes();
+            }
         } catch(e) {
             console.log(e)
         }
-    },[]);
+    },[user]);
 
     //Fetch the recipe type list
     const [recipeTypes, setRecipeTypes] = useState([]);
