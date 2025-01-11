@@ -48,4 +48,63 @@ router.get('/recipes/:id', async(req,res) => {
     }
 })
 
+//POST /recipes
+router.post('/recipes', async(req,res) => {
+    const {
+        name,
+        user_id,
+        type_id,
+        time,
+        difficulty,
+        image,
+        ingredients,
+        instructions
+    } = req.body
+
+    //Convert ingredients and instructions
+    const convertedIngredients = JSON.stringify(ingredients)
+    const convertedInstructions = JSON.stringify(instructions)
+
+    //Validate of no missing fields
+    if (!name || !user_id || !type_id || !time || !difficulty || !image || !ingredients || !instructions ) {
+        return res.status(400).json({ message: "All fields are required." });
+    }
+
+    //Validate user id
+    const foundUser = await knex('users')
+    .where("id", user_id).first()
+
+    if(!foundUser) {
+        return res.status(400).json({ message: `There is no user with the ID of ${user_id}` });
+    }
+
+    //Validate type of recipe
+    const foundType = await knex('types')
+    .where("id", type_id).first();
+
+    if(!foundType) {
+        return res.status(400).json({ message: `There is no recipe type with the ID of ${foundType.name}` });
+    }
+
+    //Insert new recipe
+    try {
+        const [newRecipeId] = await knex("recipes").insert({
+            name,
+            user_id,
+            type_id,
+            time,
+            difficulty,
+            image,
+            ingredients: convertedIngredients,
+            instructions: convertedInstructions
+        })
+
+        const newRecipe = await knex("recipes").where("id",newRecipeId).first();
+        res.status(201).json(newRecipe);
+    } catch(e) {
+        console.log(e);
+        res.status(500).json({ message: "Can't create new recipe" });
+    }
+})
+
 export default router;
