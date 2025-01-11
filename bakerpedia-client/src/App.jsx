@@ -4,7 +4,7 @@ import Signin from "./pages/Signin page/Signin.jsx";
 import Profile from "./pages/MyProfile page/Profile.jsx";
 import Recipes from "./pages/MyRecipes page/Recipes.jsx";
 import RecipeDetails from "./pages/RecipeDetails page/RecipeDetails.jsx";
-import AddRecipe from "./pages/AddRecipe";
+import AddRecipe from "./pages/AddRecipe page/AddRecipe.jsx";
 import EditRecipe from "./pages/EditRecipe";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
