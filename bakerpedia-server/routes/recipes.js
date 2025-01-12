@@ -107,4 +107,69 @@ router.post('/recipes', async(req,res) => {
     }
 })
 
+// PUT /recipes/:id
+router.put('/recipes/:id', async(req,res) => {
+    const {
+        name,
+        user_id,
+        type_id,
+        time,
+        difficulty,
+        image,
+        ingredients,
+        instructions
+    } = req.body;
+    const recipeId = req.params.id;
+
+    //Convert ingredients and instructions
+    const convertedIngredients = JSON.stringify(ingredients)
+    const convertedInstructions = JSON.stringify(instructions)
+
+    //Validate of no missing fields
+    if (!name || !user_id || !type_id || !time || !difficulty || !image || !ingredients || !instructions ) {
+        return res.status(400).json({ message: "All fields are required." });
+    }
+
+    //Validate user id
+    const foundUser = await knex('users')
+    .where("id", user_id).first()
+
+    if(!foundUser) {
+        return res.status(400).json({ message: `There is no user with the ID of ${user_id}` });
+    }
+
+    //Validate type of recipe
+    const foundType = await knex('types')
+    .where("id", type_id).first();
+
+    if(!foundType) {
+        return res.status(400).json({ message: `There is no recipe type with the ID of ${foundType.name}` });
+    }
+
+    //Edit recipe
+    try{
+        const recipe = await knex('recipes').where("id", recipeId).first();
+
+        if(!recipe) {
+            return res.status(404).json({ message: "Recipe not found to update" });
+        } else {
+            const update = await knex("recipes").where("id", recipeId).update({
+                name,
+                user_id,
+                type_id,
+                time,
+                difficulty,
+                image,
+                ingredients: convertedIngredients,
+                instructions: convertedInstructions
+            })
+
+            const recipe = await knex('recipes').where("id", recipeId).first();
+            res.status(200).json({message: "Recipe updated successfully.", recipe});
+        }
+    } catch(e) {
+        res.status(500).json({message: "Can't updating recipe."})
+    }
+ 
+})
 export default router;

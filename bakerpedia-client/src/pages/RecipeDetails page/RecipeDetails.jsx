@@ -12,8 +12,8 @@ import {userAuth} from "../UserAuth.jsx";
 
 export default function RecipeDetails() {
     //Authorize to see recipe details
-    const location = useLocation();
-    const userId = location.state;
+    // const location = useLocation();
+    // const userId = location.state;
 
     const auth = userAuth();
     const user = auth.user;
@@ -40,6 +40,7 @@ export default function RecipeDetails() {
     const {
         id,
         name,
+        user_id,
         time,
         difficulty,
         ingredients,
@@ -62,7 +63,7 @@ export default function RecipeDetails() {
         }
     },[recipeId,records])
     
-    if(user && userId !== user.id) {
+    if(user && user_id !== user.id) {
         return(
             <p className="details--unauthorized">You don't have access to this recipe</p>
         )
