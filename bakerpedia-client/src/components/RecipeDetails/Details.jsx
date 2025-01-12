@@ -5,8 +5,9 @@ import clock from "../../assets/icons/clock.svg"
 import level from "../../assets/icons/level.svg"
 import { Link } from 'react-router-dom';
 
-export default function Details(props) {
+export default function Details({recipe}) {
     const {
+        id,
         name,
         time,
         difficulty,
@@ -14,14 +15,14 @@ export default function Details(props) {
         instructions,
         type_name,
         type_icon 
-    } = props.recipe
+    } = recipe
 
     if (ingredients && instructions) {
         return(
             <div className="details__full-recipe">
                 <div className="details__full-recipe__title">
                     <h2>Recipe</h2>
-                    <Link to='/edit-recipe'>Edit</Link>
+                    <Link to={`/edit-recipe/${id}`}>Edit</Link>
                 </div>
                 <div className="details__full-recipe__content">
                     <div className="details__full-recipe__content--block">

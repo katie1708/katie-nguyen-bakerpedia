@@ -132,6 +132,13 @@ export default function AddRecipe() {
         setInstructionText("")
     }
 
+    //Handle remove a single instruction
+    const handleRemoveInstruction = (instruction) => {
+        const instructionSteps = instructions.filter((step) => step.step !== instruction.step);
+        const sortedInstructions = instructionSteps.sort((a,b) => a.step - b.step)
+        setInstructions(sortedInstructions);
+    }
+
     //Construct new recipe and POST /recipes to database
     const handleSubmit= async(e) => {
         e.preventDefault();
@@ -147,8 +154,6 @@ export default function AddRecipe() {
             instructions: instructions
         }
 
-        console.log(newRecipe)
-
         try{
             const res = await axios.post(`${baseURL}/recipes`,newRecipe);
             alert("The recipe has been created successfully.");
@@ -159,12 +164,7 @@ export default function AddRecipe() {
         navigate("/")
     }
 
-    //Handle remove a single ingredient
-    const handleRemoveInstruction = (instruction) => {
-        const instructionSteps = instructions.filter((step) => step.step !== instruction.step);
-        const sortedInstructions = instructionSteps.sort((a,b) => a.step - b.step)
-        setInstructions(sortedInstructions);
-    }
+    
 
     return(
         <div className="addrecipe">
@@ -283,7 +283,10 @@ export default function AddRecipe() {
                         </div>
                     </div>
                 </div>
-                <button className="addrecipe__form__button">Add Recipe</button>
+                <div className="addrecipe__form__button">
+                    <button type="button" className="addrecipe__form__button--cancel" onClick={() => navigate("/")}>Cancel</button>
+                    <button className="addrecipe__form__button--save">Add Recipe</button>
+                </div>
             </form>
         </div>
     )

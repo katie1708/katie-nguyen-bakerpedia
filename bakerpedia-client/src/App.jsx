@@ -5,7 +5,7 @@ import Profile from "./pages/MyProfile page/Profile.jsx";
 import Recipes from "./pages/MyRecipes page/Recipes.jsx";
 import RecipeDetails from "./pages/RecipeDetails page/RecipeDetails.jsx";
 import AddRecipe from "./pages/AddRecipe page/AddRecipe.jsx";
-import EditRecipe from "./pages/EditRecipe";
+import EditRecipe from "./pages/EditRecipe page/EditRecipe.jsx";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useEffect, useState } from "react";
@@ -21,8 +21,6 @@ function App() {
   const excludeRoutes = ['/sign-up','/sign-in']
 
   const token = sessionStorage.getItem("authToken");
-
-  // const [profile, setProfile] = useState("")
 
   useEffect(() => {
 
@@ -82,7 +80,7 @@ function App() {
                 <AddRecipe/>
               </UnauthorizedRoute>
               }></Route> 
-            <Route path="/edit-recipe" element={
+            <Route path="/edit-recipe/:recipeId" element={
               <UnauthorizedRoute>
                 <EditRecipe/>
               </UnauthorizedRoute>
