@@ -33,6 +33,7 @@ router.get('/recipes/:id', async(req,res) => {
                 'recipes.difficulty',
                 'recipes.ingredients',
                 'recipes.instructions',
+                'recipes.image',
                 'types.name as type_name',
                 'types.icon as type_icon'
             )

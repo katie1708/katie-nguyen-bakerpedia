@@ -158,11 +158,11 @@ export default function EditRecipe() {
             type_id: type.id,
             time: recipeTime,
             difficulty: recipeLevel,
-            image: "http://localhost:8080/images/placeholder.jpeg",
+            image: recipe.image,
             ingredients: ingredients,
             instructions: instructions
         }
-
+        console.log(updatedRecipe)
         try{
             const res = await axios.put(`${baseURL}/recipes/${recipe.id}`,updatedRecipe);
             alert("The recipe has been updated successfully.");
