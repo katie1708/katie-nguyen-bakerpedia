@@ -1,7 +1,7 @@
-import "./Signup.scss";
-import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Signup.scss";
 
 export default function Signup() {
     const baseURL = import.meta.env.VITE_API_URL;
@@ -116,7 +116,7 @@ export default function Signup() {
                     >
                     </input>
                 </div>
-                <button>Sign Up</button>
+                <button disabled={!firstname || !lastname || !username || !password || !confirmpassword}>Sign Up</button>
             </form>
             <p>Already have an account? <Link to="/sign-in">Log in</Link></p>
         </div>

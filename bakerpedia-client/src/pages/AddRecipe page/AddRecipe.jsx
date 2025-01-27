@@ -1,11 +1,10 @@
-import "./AddRecipe.scss"
-import { useContext } from "react";
-import {userAuth} from "../UserAuth.jsx";
-import { useEffect, useState } from 'react';
 import axios from "axios";
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import IngredientItem from "../../components/IngredientItem/IngredientItem.jsx";
 import InstructionStep from "../../components/InstructionStep/InstructionStep.jsx";
-import { useNavigate } from "react-router-dom";
+import { userAuth } from "../UserAuth.jsx";
+import "./AddRecipe.scss";
 
 
 export default function AddRecipe() {
@@ -42,7 +41,7 @@ export default function AddRecipe() {
             }
             fetchTypeList();
         } catch(e) {
-            console.log(e)
+            alert(e.response.data.message);
         }
     }, [typeList]);
     
@@ -120,16 +119,22 @@ export default function AddRecipe() {
     const handleAddInstruction = (e) => {
         e.preventDefault();
 
-        const instruction = {
-            step: instructionStep,
-            text: instructionText
-        }
+        const foundStep = instructions.find((instruction) => instruction.step == instructionStep)
 
-        const instructionSteps = instructions.concat(instruction);
-        const sortedInstructions = instructionSteps.sort((a,b) => a.step - b.step)
-        setInstructions(sortedInstructions);
-        setInstructionStep("")
-        setInstructionText("")
+        if(!foundStep) {
+            const instruction = {
+                step: instructionStep,
+                text: instructionText
+            }
+    
+            const instructionSteps = instructions.concat(instruction);
+            const sortedInstructions = instructionSteps.sort((a,b) => a.step - b.step)
+            setInstructions(sortedInstructions);
+            setInstructionStep("")
+            setInstructionText("")
+        } else {
+            alert(`There is already that step ${instructionStep}. Please delete the existing step to add a new one`)
+        }   
     }
 
     //Handle remove a single instruction
@@ -142,18 +147,17 @@ export default function AddRecipe() {
     //Construct new recipe and POST /recipes to database
     const handleSubmit= async(e) => {
         e.preventDefault();
-
+         
         const newRecipe = {
             name: recipeName,
             user_id: user.id,
             type_id: recipeType,
             time: recipeTime,
             difficulty: recipeLevel,
-            image: "http://localhost:8080/images/blueberrymuffins.jpg",
+            image: "http://localhost:8080/images/placeholder.jpeg",
             ingredients: ingredients,
             instructions: instructions
         }
-
         try{
             const res = await axios.post(`${baseURL}/recipes`,newRecipe);
             alert("The recipe has been created successfully.");
@@ -250,8 +254,8 @@ export default function AddRecipe() {
                             <button onClick={handleAddIngredient}>Add</button>
                         </div>
                         <div className="addrecipe__form__ingredients__list">
-                            {ingredients.map((ingredient) => (
-                                <IngredientItem key={ingredient.name} ingredient={ingredient} handleRemoveIngredient={handleRemoveIngredient}/>
+                            {ingredients.map((ingredient,index) => (
+                                <IngredientItem key={index} ingredient={ingredient} handleRemoveIngredient={handleRemoveIngredient}/>
                             ))}
                         </div>
                     </div>
@@ -285,7 +289,9 @@ export default function AddRecipe() {
                 </div>
                 <div className="addrecipe__form__button">
                     <button type="button" className="addrecipe__form__button--cancel" onClick={() => navigate("/")}>Cancel</button>
-                    <button className="addrecipe__form__button--save">Add Recipe</button>
+                    <button 
+                    className="addrecipe__form__button--save"
+                    disabled={!recipeName || !recipeType || !recipeTime || !recipeLevel || ingredients.length == 0 || instructions.length == 0}>Add Recipe</button>
                 </div>
             </form>
         </div>

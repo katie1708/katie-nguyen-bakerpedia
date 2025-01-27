@@ -31,3 +31,9 @@ h1{
 	text-align: center;
 }
 
+button:disabled {
+	background-color: $gray-05;
+	color: $gray-60;
+	border: none;
+}
+

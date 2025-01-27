@@ -1,7 +1,5 @@
-import { useState,useEffect } from "react";
-import "./Profile.scss"
-import { useContext } from "react";
-import {userAuth} from "../UserAuth.jsx";
+import { userAuth } from "../UserAuth.jsx";
+import "./Profile.scss";
 
 export default function Profile() {
     const auth = userAuth();

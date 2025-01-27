@@ -65,6 +65,7 @@ router.post('/recipes', async(req,res) => {
     const convertedIngredients = JSON.stringify(ingredients)
     const convertedInstructions = JSON.stringify(instructions)
 
+
     //Validate of no missing fields
     if (!name || !user_id || !type_id || !time || !difficulty || !image || !ingredients || !instructions ) {
         return res.status(400).json({ message: "All fields are required." });

@@ -30,6 +30,16 @@
             padding: 12px 16px;
         }
 
+        select {
+            appearance: none;
+            padding:  0.75rem 1.5rem;
+            border-color: $gray-40;
+            border-radius: 6px;
+            background-image: url(../../assets/icons/arrowdown.svg);
+            background-repeat: no-repeat;
+            background-position: right 24px top 18px;
+        }
+
         &__info {
             display: flex;
             flex-wrap: wrap;
@@ -106,6 +116,7 @@
                     display: flex;
                     column-gap: 24px;
                     align-items: center;
+                    height: 48px;
 
                     &__text {
                         width: 80%;
@@ -147,6 +158,10 @@
                 
                 &--step {
                     width: 48px;
+                    input {
+                        padding: 0;
+                        padding-left: 12px;
+                    }
                 }
     
                 &--text {
@@ -207,12 +222,10 @@
             column-gap: 1rem;
 
             &--cancel {
-                background-color: $gray-05;
                 height: 48px;
                 width: 8rem;
-                border: none;
+                border: solid 1px $gray-40;
                 border-radius: 6px;
-                font-weight: $semi-bold;
             }
 
             &--save {

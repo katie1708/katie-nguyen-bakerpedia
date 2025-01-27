@@ -17,9 +17,14 @@
         align-items: center;
         column-gap: 0.5rem;
         select {
+            appearance: none;
             padding:  0.75rem 1.5rem;
             border-color: $gray-40;
             border-radius: 6px;
+            background-image: url(../../assets/icons/arrowdown.svg);
+            background-repeat: no-repeat;
+            background-position: right 24px top 18px;
+            width: 12rem;
         }
     }
     &__search {
@@ -42,7 +47,7 @@
             border: none;
         }
         &-button {
-            border-color: $gray-40;
+            border: solid 1px $gray-40;
             border-radius: 6px;
             padding: 0.75rem 1.5rem;
         }

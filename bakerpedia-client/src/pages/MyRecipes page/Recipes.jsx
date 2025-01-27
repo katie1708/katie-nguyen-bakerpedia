@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import search from "../../assets/icons/search.svg"
+import search from "../../assets/icons/search.svg";
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
-import "./Recipes.scss"
-import {userAuth} from "../UserAuth.jsx";
+import { userAuth } from "../UserAuth.jsx";
+import "./Recipes.scss";
 
 export default function Recipes() {
     const auth = userAuth();
@@ -28,7 +28,7 @@ export default function Recipes() {
                 fetchRecipes();
             }
         } catch(e) {
-            console.log(e)
+            alert(e.response.data.message);
         }
     },[user]);
 
@@ -43,7 +43,7 @@ export default function Recipes() {
             }
             fetchTypes();
         } catch(e) {
-            console.log(e)
+            alert(e.response.data.message);
         }
     },[recipeTypes]);
 
@@ -125,7 +125,7 @@ export default function Recipes() {
                             value={typeValue}
                             onChange={handleTypeFilter}
                         >
-                            <option value="no type">Recipe type</option>
+                            <option value="no type" style={{backgroundImage:"../../assets/icons/arrowdown.svg"}}>Recipe type</option>
                             {recipeTypes.map((type) => (
                                 <option key={type.id} value={type.name}>
                                     {type.name}
@@ -159,7 +159,7 @@ export default function Recipes() {
                             >
                         </input>
                     </div>
-                    <button className='recipes__search-button'>Search</button>
+                    <p className='recipes__search-button'>Search</p>
                 </form>
             </div>
             

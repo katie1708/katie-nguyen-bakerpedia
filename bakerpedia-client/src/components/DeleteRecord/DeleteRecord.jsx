@@ -24,7 +24,7 @@ export default function DeleteRecord(props) {
         try {
             await axios.delete(`${baseURL}/records/${recordId}`);
         } catch(e) {
-            console.log(e)
+            alert(e.response.data.message);
         }
     }
 

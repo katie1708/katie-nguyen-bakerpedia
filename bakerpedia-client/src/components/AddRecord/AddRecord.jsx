@@ -1,7 +1,7 @@
 import axios from 'axios';
-import './AddRecord.scss';
 import { useState } from 'react';
 import { FaStar } from "react-icons/fa";
+import './AddRecord.scss';
 
 
 export default function AddRecord(props) {
@@ -68,9 +68,8 @@ export default function AddRecord(props) {
         }
 
         try{
-            const res = await axios.post(`${baseURL}records`,newRecord);
+            const res = await axios.post(`${baseURL}/records`,newRecord);
             alert("The item has been created successfully.");
-            console.log(res);
         }catch (e){
             alert(e.response.data.message);
         }
@@ -130,7 +129,10 @@ export default function AddRecord(props) {
                     </div>
                 </form>
                 <div className='addrecord-active__button'>
-                    <button className='addrecord-active__button--add' onClick={() => {action();}} form="add__form">Add baking history</button>
+                    <button 
+                    className='addrecord-active__button--add' 
+                    onClick={() => {action();}} form="add__form"
+                    disabled={!date || !rating || !notes}>Add baking history</button>
                     <button className='addrecord-active__button--cancel' onClick={() => {action();setHoverValue(0);setRating(0);}}>Cancel</button>
                 </div>
             </div>

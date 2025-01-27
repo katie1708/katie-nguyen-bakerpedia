@@ -1,14 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import clock from "../../assets/icons/clock.svg"
-import level from "../../assets/icons/level.svg"
-import { Link } from 'react-router-dom';
+import clock from "../../assets/icons/clock.svg";
+import level from "../../assets/icons/level.svg";
 import Details from "../../components/RecipeDetails/Details";
 import Records from "../../components/RecipeRecords/Records";
-import "./RecipeDetails.scss"
-import { useLocation } from "react-router-dom";
-import {userAuth} from "../UserAuth.jsx";
+import { userAuth } from "../UserAuth.jsx";
+import "./RecipeDetails.scss";
 
 export default function RecipeDetails() {
     //Authorize to see recipe details
@@ -33,7 +31,7 @@ export default function RecipeDetails() {
             }
             fetchRecipe()
         } catch(e) {
-            console.log(e)
+            alert(e.response.data.message);
         }
     },[recipeId])
 
@@ -59,7 +57,7 @@ export default function RecipeDetails() {
             }
             fetchRecords()
         } catch(e) {
-            console.log(e)
+            alert(e.response.data.message);
         }
     },[recipeId,records])
     

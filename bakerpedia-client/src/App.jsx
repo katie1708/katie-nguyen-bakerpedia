@@ -1,16 +1,16 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import Signup from "./pages/Signup page/Signup";
-import Signin from "./pages/Signin page/Signin.jsx";
-import Profile from "./pages/MyProfile page/Profile.jsx";
-import Recipes from "./pages/MyRecipes page/Recipes.jsx";
-import RecipeDetails from "./pages/RecipeDetails page/RecipeDetails.jsx";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 import AddRecipe from "./pages/AddRecipe page/AddRecipe.jsx";
 import EditRecipe from "./pages/EditRecipe page/EditRecipe.jsx";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import {AuthorizedRoute, UnauthorizedRoute} from "./pages/PrivateRoute/PrivateRoute.jsx";
+import Profile from "./pages/MyProfile page/Profile.jsx";
+import Recipes from "./pages/MyRecipes page/Recipes.jsx";
+import { AuthorizedRoute, UnauthorizedRoute } from "./pages/PrivateRoute/PrivateRoute.jsx";
+import RecipeDetails from "./pages/RecipeDetails page/RecipeDetails.jsx";
+import Signin from "./pages/Signin page/Signin.jsx";
+import Signup from "./pages/Signup page/Signup";
 import AuthProvider from "./pages/UserAuth.jsx";
 
 function App() {

@@ -1,8 +1,3 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
-import clock from "../../assets/icons/clock.svg"
-import level from "../../assets/icons/level.svg"
 import { Link } from 'react-router-dom';
 
 export default function Details({recipe}) {
@@ -28,8 +23,8 @@ export default function Details({recipe}) {
                     <div className="details__full-recipe__content--block">
                         <p className="details__full-recipe__content--title">Ingredients</p>
                         <ul className="details__full-recipe__content--list-ingredients">
-                            {ingredients.map((item) => (
-                                <li className="details__full-recipe__content--list-item" key={item.name}>{`${item.quantity} ${item.unit} ${item.name}`}</li>
+                            {ingredients.map((item,index) => (
+                                <li className="details__full-recipe__content--list-item" key={index}>{`${item.quantity} ${ (item.unit !== null) ? item.unit : "" } ${item.name}`}</li>
                             ))}
                         </ul>
                     </div>

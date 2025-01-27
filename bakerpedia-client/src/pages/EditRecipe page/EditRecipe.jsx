@@ -1,6 +1,6 @@
-import { useLocation,useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import IngredientItem from "../../components/IngredientItem/IngredientItem.jsx";
 import InstructionStep from "../../components/InstructionStep/InstructionStep.jsx";
 
@@ -19,7 +19,7 @@ export default function EditRecipe() {
             }
             fetchTypeList();
         } catch(e) {
-            console.log(e)
+            alert(e.response.data.message);
         }
     });
 
@@ -121,16 +121,22 @@ export default function EditRecipe() {
     const handleAddInstruction = (e) => {
         e.preventDefault();
 
-        const instruction = {
-            step: instructionStep,
-            text: instructionText
-        }
+        const foundStep = instructions.find((instruction) => instruction.step == instructionStep)
 
-        const instructionSteps = instructions.concat(instruction);
-        const sortedInstructions = instructionSteps.sort((a,b) => a.step - b.step)
-        setInstructions(sortedInstructions);
-        setInstructionStep("")
-        setInstructionText("")
+        if(!foundStep) {
+            const instruction = {
+                step: instructionStep,
+                text: instructionText
+            }
+    
+            const instructionSteps = instructions.concat(instruction);
+            const sortedInstructions = instructionSteps.sort((a,b) => a.step - b.step)
+            setInstructions(sortedInstructions);
+            setInstructionStep("")
+            setInstructionText("")
+        } else {
+            alert(`There is already that step ${instructionStep}. Please delete the existing step to add a new one`)
+        }   
     }
 
     //Handle remove a single instruction
@@ -152,7 +158,7 @@ export default function EditRecipe() {
             type_id: type.id,
             time: recipeTime,
             difficulty: recipeLevel,
-            image: "http://localhost:8080/images/blueberrymuffins.jpg",
+            image: "http://localhost:8080/images/placeholder.jpeg",
             ingredients: ingredients,
             instructions: instructions
         }
@@ -259,8 +265,8 @@ export default function EditRecipe() {
                                 <button onClick={handleAddIngredient}>Add</button>
                             </div>
                             <div className="addrecipe__form__ingredients__list">
-                                {ingredients.map((ingredient) => (
-                                    <IngredientItem key={ingredient.name} ingredient={ingredient} handleRemoveIngredient={handleRemoveIngredient}/>
+                                {ingredients.map((ingredient,index) => (
+                                    <IngredientItem key={index} ingredient={ingredient} handleRemoveIngredient={handleRemoveIngredient}/>
                                 ))}
                             </div>
                         </div>

@@ -1,8 +1,8 @@
-import "./Signin.scss"
-import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { useState } from "react";
-import {userAuth} from "../../pages/UserAuth";
+import { Link, useNavigate } from "react-router-dom";
+import { userAuth } from "../../pages/UserAuth";
+import "./Signin.scss";
 
 export default function Signin() {
     const baseURL = import.meta.env.VITE_API_URL;
@@ -63,7 +63,7 @@ export default function Signin() {
                     value={password}
                     onChange={handlePassword}></input>
                 </div>
-                <button>Log in</button>
+                <button disabled={ !username || !password}>Log in</button>
             </form>
             <p>Don't have an account? <Link to="/sign-up">Sign Up</Link></p>
         </div>
